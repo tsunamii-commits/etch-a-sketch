@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            position: relative;
+        }
+
+        .grid-container {
+            padding-top: 50px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            width: 1000px; /* Adjust the width as needed */
+            height: 1000px; /* Add this line to set the height */
+        }
+        
+        .grid-item {
+            /* Calculate width and height based on user input */
+            width: calc(100% / var(--numInput));
+            height: calc(100% / var(--numInput));
+            border: 1px solid gray;
+            box-sizing: border-box;
+        }
+
+        .permahover {
+            background: yellow;
+        }
+
+        /* CSS */
+        #myButton {
+            background-color: #EA4C89;
+            border-radius: 8px;
+            border-style: none;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: block;
+            font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            height: 40px;
+            line-height: 20px;
+            list-style: none;
+            margin: auto;
+            margin-top: 20px;
+            outline: none;
+            padding: 10px 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: color 100ms;
+            vertical-align: baseline;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        #myButton:hover,
+        #myButton:focus {
+            background-color: #F082AC;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="myButton">Click Me!</button>
+        <div class="grid-container"></div>
+    </div>
+
+    <script>
+         const button = document.getElementById('myButton');
+         const gridContainer = document.querySelector('.grid-container');
+         let numInput;
+
+        button.addEventListener('click', function() {
+            // Prompt the user for input
+            numInput = window.prompt('Please enter a number:', '');
+
+            // Set the custom CSS variable to be used in the grid item style
+            gridContainer.style.setProperty('--numInput', numInput);
+
+            // Create the grid
+            for (let i = 0; i < numInput; i++) {
+                for (let j = 0; j < numInput; j++) {
+                    const gridItem = document.createElement('div');
+                    gridItem.classList.add('grid-item');
+                    gridContainer.appendChild(gridItem);
+                }
+            }
+    
+            const smallBoxes = document.querySelectorAll('.grid-item');
+
+            [...smallBoxes].forEach(smallBox => {
+                smallBox.addEventListener('mouseover', () => {
+                    smallBox.classList.add('permahover');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
